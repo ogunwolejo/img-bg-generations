@@ -23,10 +23,10 @@ interface IForgotten {
 const assets = loadAllAsset();
 const prototype = "ogunwole888@gmail.com"
 
-const Fgtemail = (): React.JSX.Element => {
+const Index = (): React.JSX.Element => {
     const theme = useThemeColor();
     const val = useLocalSearchParams<{email: string}>();
-    console.log("Params", val)
+
     const {formState, handleSubmit, control} = useForm<IForgotten>({
         defaultValues: {
             email: val.email,
@@ -74,4 +74,4 @@ const Fgtemail = (): React.JSX.Element => {
     );
 };
 
-export default Fgtemail
+export default Index

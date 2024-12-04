@@ -9,7 +9,7 @@ import {router} from "expo-router";
 const assets = loadAllAsset();
 export default function SecondaryInfo(): React.JSX.Element {
     const theme = useThemeColor();
-    const authHandle = () => router.replace("(auth)");
+    const authHandle = () => router.replace("(tabs)");
     return (
         <IntroLayout
             src={require("@/assets/images/misc/Saly-27.png")}

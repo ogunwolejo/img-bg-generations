@@ -37,7 +37,7 @@ const Index = (): React.JSX.Element => {
     const forgetPasswordHandler = () => {
         const userEmail: string = getValues("email");
         router.navigate({
-            pathname: "fgtemail",
+            pathname: "(forget-password)",
             params: {
                 email: userEmail.length ? userEmail : "",
             },
