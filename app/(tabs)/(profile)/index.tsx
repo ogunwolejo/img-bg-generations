@@ -51,7 +51,7 @@ export default function UserProfile(): React.JSX.Element {
                 backgroundColor={theme.white}
             />
             <View style={styles.profile_container}>
-                <AuthUserProfile />
+                <UnAuthUserProfile />
             </View>
         </SafeAreaView>
     )

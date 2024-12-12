@@ -11,6 +11,8 @@ import {RoundedInputPassword} from "@/components/ui/RoundedInputPassword.tsx";
 import {ErrorMessage} from "@/components/ui/errorMessage.tsx";
 import {RoundedBtn} from "@/components/ui/RoundedBtn.tsx";
 import {router} from "expo-router";
+import {emailPasswordSignIn} from "@/api/emailPasswordSignin";
+import {AuthResponse} from "@/types/auth";
 
 const assets = loadAllAsset();
 const schema = yup.object().shape({
@@ -34,6 +36,7 @@ const Index = (): React.JSX.Element => {
         },
     });
     const createAccountHandle = () => router.navigate("signup");
+
     const forgetPasswordHandler = () => {
         const userEmail: string = getValues("email");
         router.navigate({
@@ -46,8 +49,14 @@ const Index = (): React.JSX.Element => {
     const passwordVisibilityHandle = () => {
         setIsPasswordSecure(current => !current);
     };
-    const submitHandler = (formData: SignInInput) => {
-        console.log(formData);
+    const submitHandler = async (formData: SignInInput) => {
+        const {email, password} = formData;
+        const response: AuthResponse = await emailPasswordSignIn({email, password});
+        if (response.error) {
+            throw Error(response.error)
+        }
+        console.log("DONE: ", response);
+
     };
 
 
@@ -95,10 +104,14 @@ const Index = (): React.JSX.Element => {
                 <TouchableOpacity onPress={forgetPasswordHandler} activeOpacity={0.6}>
                     <Text style={{...styles.normal_txt, textAlign: "right"}}>Forget Password?</Text>
                 </TouchableOpacity>
-                <RoundedBtn
-                    title="Log In"
-                    handler={handleSubmit(submitHandler)}
-                />
+                {
+                    !formState.isLoading ? <RoundedBtn
+                        title="Log In"
+                        handler={handleSubmit(submitHandler)}
+                    />
+                        :
+                    <Text style={{color: theme.blueText}}>Loading...</Text>
+                }
                 <View style={styles.create_acct_wrapper}>
                     <Text style={styles.normal_txt}>Don’t have account?</Text>
                     <TouchableOpacity onPress={createAccountHandle}>

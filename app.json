@@ -34,10 +34,7 @@
         }
       ],
       [
-        "@react-native-google-signin/google-signin",
-        {
-          "iosUrlScheme": "com.googleusercontent.apps._some_id_here_"
-        }
+        "@react-native-google-signin/google-signin"
       ]
     ],
     "splash": {
@@ -47,6 +44,14 @@
     },
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "04bd2076-1733-4af7-9ef6-ef3f1f237ebc"
+      }
     }
   }
 }

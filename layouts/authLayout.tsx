@@ -5,8 +5,7 @@ import {IconContainer} from "@/components/ui/IconContainer.tsx";
 import {loadAllAsset} from "@/constants/load_assets";
 import {Dash} from "@/components/ui/dash.tsx";
 import {useThemeColor} from "@/hooks/useThemeColor"
-
-// the google sigin package
+//import useGoogleSignIn from "@/hooks/useGoogleSignIn";
 
 type Props = {
     icon: ImageSourcePropType;
@@ -15,11 +14,13 @@ type Props = {
 } & PropsWithChildren
 const assets = loadAllAsset();
 export const AuthLayout = memo(({children, pageTitle, icon}: Props): React.JSX.Element => {
+    //const {signIn} = useGoogleSignIn();
     const theme = useThemeColor();
     const {height, width} = useWindowDimensions();
     const dashLength: number = useMemo(() => {
         return (width / 3) + 20; // we divide the screen width by three and also take into account the horizontal margin
     }, [width]);
+
     return (
         <SafeAreaView style={{...styles.wrapper, backgroundColor: theme.white}}>
             <StatusBar
@@ -38,7 +39,7 @@ export const AuthLayout = memo(({children, pageTitle, icon}: Props): React.JSX.E
                 </Text>
                 <View style={styles.social_container}>
                     <SocialBtn icon={assets.facebook} text="Facebook" onPress={() => {}} />
-                    <SocialBtn icon={assets.google} text="Google" onPress={() => {}} />
+                    <SocialBtn icon={assets.google} text="Google" onPress={null} />
                 </View>
                 <View style={styles.divide_container}>
                     <Dash length={dashLength} bg={theme.gray1}/>
